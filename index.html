@@ -1,7 +1,4 @@
-<html>
-        <head><title>Downloaded HTML</title></head>
-        <body>
-            <pre style="white-space: pre-wrap; word-wrap: break-word;"><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -21,7 +18,32 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden;line-height:1.6;}
 ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--cream-dark);}::-webkit-scrollbar-thumb{background:var(--brown-warm);border-radius:3px;}
+form {
+  max-width: 500px;
+  margin: 120px auto 50px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
 
+.form-group {
+  margin-bottom: 18px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+}
+       
 /* NAV */
 nav{position:fixed;top:0;left:0;width:100%;z-index:1000;transition:var(--transition);padding:18px 0;}
 nav.scrolled{background:rgba(253,248,243,0.97);backdrop-filter:blur(20px);box-shadow:0 2px 24px var(--shadow);padding:12px 0;}
