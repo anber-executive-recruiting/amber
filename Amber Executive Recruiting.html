@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Amber Executive Recruiting</title>
+  <style>
+    /* Reset and full-height layout to avoid gaps */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: #fff;
+      color: #222;
+    }
+
+    /* Top control bar that holds optional fields */
+    .top-bar{
+      padding: 12px 16px;
+      background: #f7f6f3;
+      border-bottom: 1px solid #e8e4dd;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .top-bar label{font-size:13px;color:#444;margin-right:6px;}
+    .top-bar .inputs{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+    .top-bar input[type="url"], .top-bar input[type="email"]{
+      padding:8px 10px;border-radius:8px;border:1px solid #dcd6cc;background:white;font-size:13px;min-width:240px;box-sizing:border-box;
+    }
+    .top-bar .note{font-size:12px;color:#666;margin-left:8px}
+    .top-bar .spacer{flex:1 1 auto}
+
+    /* The iframe fills remaining viewport without gaps */
+    .iframe-wrap{flex:1 1 auto; display:block; min-height:0;}
+    .iframe-wrap iframe{display:block;width:100%;height:100%;border:0}
+
+    /* Small responsive tweak */
+    @media (max-width:600px){
+      .top-bar input{min-width:160px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Optional fields placed in the parent page (visible above the embedded app). -->
+  <div class="top-bar" role="region" aria-label="Application helper fields">
+    <div class="inputs">
+      <label for="linkedin">LinkedIn (optional)</label>
+      <input id="linkedin" name="linkedin" type="url" placeholder="https://www.linkedin.com/in/yourprofile" aria-describedby="linkedin-hint" />
+      <label for="website">Website / Portfolio (optional)</label>
+      <input id="website" name="website" type="url" placeholder="https://yoursite.com" aria-describedby="website-hint" />
+      <label for="recruiterEmail">Recruiter Email</label>
+      <input id="recruiterEmail" name="recruiterEmail" type="email" value="caroline.recruitt@gmail.com" aria-describedby="recruiter-hint" />
+    </div>
+    <div class="spacer"></div>
+    <div class="note">Optional fields — these are visible here because the application form is embedded from an external host (iframe) and cannot be modified directly from this page.</div>
+  </div>
+
+  <div class="iframe-wrap">
+    <iframe id="gasiframe" src="https://script.google.com/macros/s/AKfycbzLHP8F48chToOSVKqhmqy7SW9CBIUs-bZMo4KLMv6xv4kseiiLdb7KOIvGiyR2Wm4Fvg/exec" title="Amber Application"></iframe>
+  </div>
+
+  <script>
+    // Simple client-side validation: ensure optional URLs include protocol when provided
+    function isValidUrl(v){ if(!v) return true; try{ var u = new URL(v); return u.protocol==='http:'||u.protocol==='https:'; }catch(e){return false;} }
+
+    // Show simple warning in placeholder if invalid when user leaves input
+    ['linkedin','website'].forEach(id=>{
+      var el = document.getElementById(id);
+      el && el.addEventListener('blur', function(){
+        if(this.value && !isValidUrl(this.value)){
+          this.style.borderColor = '#e06a6a';
+        } else {
+          this.style.borderColor = '#dcd6cc';
+        }
+      });
+    });
+
+    // Note: because the iframe is cross-origin (script.google.com), we cannot push these values into the embedded form.
+    // If you control the iframe content, consider adding a small query string to the iframe src (e.g. ?linkedin=...) and reading it inside the embedded app.
+  </script>
+</body>
+</html>
